@@ -11,3 +11,10 @@ body {
 	justify-content: space-between;
   background-color: bisque;
 }
+
+.page-header ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+  }
