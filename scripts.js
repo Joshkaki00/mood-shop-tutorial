@@ -4,8 +4,6 @@ const itemsContainer = document.querySelector('#items')
 
 const cart = []
 
-
-
 const displayCart = () => {
 	console.log(cart)
 	let cartStr = ''
