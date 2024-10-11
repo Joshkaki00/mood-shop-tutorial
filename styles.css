@@ -13,14 +13,27 @@ body {
 }
 
 .page-header ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    list-style: none;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+}
 
 .page-header a {
-    display: block;
-    padding:0.5em;
-    text-decoration:none;
-  }
+  display: block;
+  padding:0.5em;
+  text-decoration:none;
+}
+
+.items {
+  width: 80%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+}
+
+.items img {
+  width: 100%;
+  height: auto;
+}
