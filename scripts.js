@@ -26,8 +26,10 @@ const displayCart = () => {
   
   document.body.addEventListener('click', (e) => {
 	if (e.target.matches('.add-to-cart')) {
+	  console.log(e.target)
 	  addItemToCart(e.target.dataset.id, e.target.dataset.price)
-	  displayCart() // Display the cart! 
+	  console.log(cart)
+	  displayCart()
 	}
   })
 	
