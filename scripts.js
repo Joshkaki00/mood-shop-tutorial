@@ -4,32 +4,34 @@ const itemsContainer = document.querySelector('#items')
 
 const cart = []
 
-document.body.addEventListener('click', (e) => {
-if (e.target.matches('.add-to-cart')) {
-	addItemToCart(e.target.dataset.id, e.target.dataset.price)
-	displayCart() // Display the cart! 
-}
-})
+
 
 const displayCart = () => {
 	console.log(cart)
 	let cartStr = ''
 	for (let i = 0; i < cart.length; i += 1) {
-		const item = cart[i]
-		cartStr += `<li>
+	  const item = cart[i]
+	  cartStr += `<li>
 		<span>${item.id}</span>
 		<input type="number" value="${item.qty}" class="input-qty" data-id="${item.id}">
 		<span>${item.price}</span>
 		<span>${(item.price * item.qty).toFixed(2)}</span>
 		<button class="button-add" data-id="${item.id}">+</button>
 		<button class="button-sub" data-id="${item.id}">-</button>
-		</li>`
+	  </li>`
 	}
 	// Get the cart 
 	const cartItems = document.querySelector('#cart-items')
 	// Set the inner html of the cart
 	cartItems.innerHTML = cartStr
+  }
+  
+  document.body.addEventListener('click', (e) => {
+	if (e.target.matches('.add-to-cart')) {
+	  addItemToCart(e.target.dataset.id, e.target.dataset.price)
+	  displayCart() // Display the cart! 
 	}
+  })
 	
 const addItemToCart = (id, price) => {
 	// Loop over cart items. 
