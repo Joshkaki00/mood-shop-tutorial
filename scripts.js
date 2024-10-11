@@ -2,6 +2,48 @@ import data from './data.js'
 
 const itemsContainer = document.querySelector('#items')
 
+const cart = []
+
+document.body.addEventListener('click', (e) => {
+if (e.target.matches('.add-to-cart')) {
+	addItemToCart(e.target.dataset.id, e.target.dataset.price)
+	displayCart() // Display the cart! 
+}
+})
+
+const displayCart = () => {
+	console.log(cart)
+	let cartStr = ''
+	for (let i = 0; i < cart.length; i += 1) {
+		const item = cart[i]
+		cartStr += `<li>
+		<span>${item.id}</span>
+		<input type="number" value="${item.qty}" class="input-qty" data-id="${item.id}">
+		<span>${item.price}</span>
+		<span>${(item.price * item.qty).toFixed(2)}</span>
+		<button class="button-add" data-id="${item.id}">+</button>
+		<button class="button-sub" data-id="${item.id}">-</button>
+		</li>`
+	}
+	// Get the cart 
+	const cartItems = document.querySelector('#cart-items')
+	// Set the inner html of the cart
+	cartItems.innerHTML = cartStr
+	}
+	
+const addItemToCart = (id, price) => {
+	// Loop over cart items. 
+	for (let i = 0; i < cart.length; i += 1) {
+	// If we find a matching item increase the quantity
+	if (cart[i].id === id) {
+		cart[i].qty += 1
+		return // exit this function early
+	}
+	}
+	// If no matching items were found add a new item
+	cart.push({ id, price, qty: 1 })
+}
+
 // the length of our data determines how many times this loop goes around
 for (let i = 0; i < data.length; i += 1) {
 	// create a new div element and give it a class name
@@ -37,21 +79,4 @@ for (let i = 0; i < data.length; i += 1) {
 	button.dataset.price = data[i].price
 	button.innerHTML = "Add to Cart"
 	newDiv.appendChild(button)
-}
-
-	const addItemToCart = (id, price) => {
-		// Loop over cart items. 
-		for (let i = 0; i < cart.length; i += 1) {
-		// If we find a matching item increase the quantity
-		if (cart[i].id === id) {
-			cart[i].qty += 1
-			return // exit this function early
-		}
-		}
-		// If no matching items were found add a new item
-		cart.push({ id, price, qty: 1 })
 	}
-
-	document.body.addEventListener('click', (e) => {
-		console.log(e.target)
-	})
