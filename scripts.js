@@ -23,28 +23,48 @@ const displayCart = () => {
 	// Set the inner html of the cart
 	cartItems.innerHTML = cartStr
   }
-  
-  document.body.addEventListener('click', (e) => {
-	if (e.target.matches('.add-to-cart')) {
-	  console.log(e.target)
-	  addItemToCart(e.target.dataset.id, e.target.dataset.price)
-	  console.log(cart)
-	  displayCart()
-	}
-  })
-	
-const addItemToCart = (id, price) => {
-	// Loop over cart items. 
+
+const addToCart = (id) => {
 	for (let i = 0; i < cart.length; i += 1) {
-	// If we find a matching item increase the quantity
-	if (cart[i].id === id) {
-		cart[i].qty += 1
+	  const item = cart[i] // get the item from the cart
+	  // Does the name match the name of the id? 
+	  if (id === item.id) {
+		// if so...
+		item.qty += 1 // add 1 to qty
 		return // exit this function early
+	  }
 	}
+  }
+
+const removeFromCart = (id) => {
+// Loop over items in cart
+for (let i = 0; i < cart.length; i += 1 ) {
+	// get an item 
+	const item = cart[i]
+	// Does id match the item id? 
+	if (id === item.id) {
+	// if so, subtract 1 from item qty
+	item.qty -= 1
+	
+	return 
 	}
-	// If no matching items were found add a new item
-	cart.push({ id, price, qty: 1 })
 }
+}
+  
+document.body.addEventListener('click', (e) => {
+if (e.target.matches('.add-to-cart')) {
+	console.log(e.target)
+	addItemToCart(e.target.dataset.id, e.target.dataset.price)
+	console.log(cart)
+	displayCart()
+} else if (e.target.matches('.button-add')) {
+	const name = e.target.dataset.id
+	addToCart(name)
+	displayCart()
+} else if (e.target.matches('.button-sub')) {
+	// decrease qty by 1
+}
+})
 
 // the length of our data determines how many times this loop goes around
 for (let i = 0; i < data.length; i += 1) {
