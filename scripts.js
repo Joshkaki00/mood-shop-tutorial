@@ -38,3 +38,20 @@ for (let i = 0; i < data.length; i += 1) {
 	button.innerHTML = "Add to Cart"
 	newDiv.appendChild(button)
 }
+
+	const addItemToCart = (id, price) => {
+		// Loop over cart items. 
+		for (let i = 0; i < cart.length; i += 1) {
+		// If we find a matching item increase the quantity
+		if (cart[i].id === id) {
+			cart[i].qty += 1
+			return // exit this function early
+		}
+		}
+		// If no matching items were found add a new item
+		cart.push({ id, price, qty: 1 })
+	}
+
+	document.body.addEventListener('click', (e) => {
+		console.log(e.target)
+	})
