@@ -24,17 +24,18 @@ const displayCart = () => {
 	cartItems.innerHTML = cartStr
   }
 
-const addToCart = (id) => {
+  const addToCart = (id, price) => {
 	for (let i = 0; i < cart.length; i += 1) {
-	  const item = cart[i] // get the item from the cart
-	  // Does the name match the name of the id? 
+	  const item = cart[i];
 	  if (id === item.id) {
-		// if so...
-		item.qty += 1 // add 1 to qty
-		return // exit this function early
+		item.qty += 1;
+		return;
 	  }
 	}
-  }
+	// If the item does not exist, push a new item to the cart
+	cart.push({ id, price: parseFloat(price), qty: 1 });
+  };
+  
 
 const removeFromCart = (id) => {
 // Loop over items in cart
@@ -56,19 +57,18 @@ for (let i = 0; i < cart.length; i += 1 ) {
 }
   
 document.body.addEventListener('click', (e) => {
-if (e.target.matches('.add-to-cart')) {
-	console.log(e.target)
-	addToCart(e.target.dataset.id, e.target.dataset.price)
-	console.log(cart)
-	displayCart()
-} else if (e.target.matches('.button-add')) {
-	const name = e.target.dataset.id
-	addToCart(name)
-	displayCart()
-} else if (e.target.matches('.button-sub')) {
-	// decrease qty by 1
-}
-})
+  if (e.target.matches('.add-to-cart')) {
+    addToCart(e.target.dataset.id, e.target.dataset.price);
+    displayCart();
+  } else if (e.target.matches('.button-add')) {
+    addToCart(e.target.dataset.id);
+    displayCart();
+  } else if (e.target.matches('.button-sub')) {
+    removeFromCart(e.target.dataset.id);
+    displayCart();
+  }
+});
+
 
 // the length of our data determines how many times this loop goes around
 for (let i = 0; i < data.length; i += 1) {
