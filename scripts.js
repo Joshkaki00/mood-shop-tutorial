@@ -45,7 +45,11 @@ for (let i = 0; i < cart.length; i += 1 ) {
 	if (id === item.id) {
 	// if so, subtract 1 from item qty
 	item.qty -= 1
-	
+	// Check if the qty is 0
+	if (item.qty === 0) {
+		// If so remove this item from the cart
+		cart.splice(i, 1)
+	}
 	return 
 	}
 }
