@@ -18,9 +18,13 @@ const displayCart = () => {
 		<button class="button-sub" data-id="${item.id}">-</button>
 	  </li>`
 	}
-	// Get the cart 
+  
+	// Get the total cost in the cart
+	const cartTotal = getCartTotal()
+	// append a li tag at the end of the cartStr with the total
+	cartStr += `<li>Total: ${cartTotal}</li>`
+  
 	const cartItems = document.querySelector('#cart-items')
-	// Set the inner html of the cart
 	cartItems.innerHTML = cartStr
   }
 
@@ -72,6 +76,19 @@ const updateCart = (id, val) => {
 	}
   }
 
+const getCartTotal = () => {
+	let total = 0
+	for (let i = 0; i < cart.length; i += 1) {
+	  const item = cart[i]
+	  total += item.qty * item.price
+	}
+	return total // return total
+}
+
+const theTotal = getCartTotal()
+console.log(theTotal.toFixed(2))
+
+
 document.body.addEventListener('change', (e) => {
 if (e.target.matches('.input-qty')) {
 	const name = e.target.dataset.id // get the id
@@ -96,17 +113,17 @@ document.body.addEventListener('keydown', (e) => {
   })
   
 document.body.addEventListener('click', (e) => {
-  if (e.target.matches('.add-to-cart')) {
-    addToCart(e.target.dataset.id, e.target.dataset.price);
-    displayCart();
-  } else if (e.target.matches('.button-add')) {
-    addToCart(e.target.dataset.id);
-    displayCart();
-  } else if (e.target.matches('.button-sub')) {
-    removeFromCart(e.target.dataset.id);
-    displayCart();
-  }
-});
+	if (e.target.matches('.add-to-cart')) {
+	  addToCart(e.target.dataset.id, e.target.dataset.price);
+	  displayCart();
+	} else if (e.target.matches('.button-add')) {
+	  addToCart(e.target.dataset.id, e.target.dataset.price); // Add price here
+	  displayCart();
+	} else if (e.target.matches('.button-sub')) {
+	  removeFromCart(e.target.dataset.id);
+	  displayCart();
+	}
+})
 
 
 // the length of our data determines how many times this loop goes around
