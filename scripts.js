@@ -54,7 +54,7 @@ for (let i = 0; i < cart.length; i += 1 ) {
 document.body.addEventListener('click', (e) => {
 if (e.target.matches('.add-to-cart')) {
 	console.log(e.target)
-	addItemToCart(e.target.dataset.id, e.target.dataset.price)
+	addToCart(e.target.dataset.id, e.target.dataset.price)
 	console.log(cart)
 	displayCart()
 } else if (e.target.matches('.button-add')) {
